@@ -101,18 +101,23 @@ def admin_appointments(request):
 
 
 def book_appointment(request):
+    agents = Agent.objects.all()  # Fetch all agents from the database
+
     if request.method == "POST":
         form = AppointmentForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('success_page')  # Change to your actual success page
+            return redirect('appointment_success')  # Change to your actual success page
     else:
         form = AppointmentForm()
 
-    return render(request, 'book_appointment.html', {'form': form})
+    return render(request, 'book_appointment.html', {'form': form, 'agents': agents})
+
 
 def appointment_success(request):
     return render(request, 'appointment_success.html')
+
+
 
 
 @login_required

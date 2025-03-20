@@ -1,18 +1,69 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container mt-5">
-    <div class="card p-4 shadow">
-        <h2 class="text-center mb-4">Add New Agent</h2>
-        <form method="post" enctype="multipart/form-data">
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="card p-5 shadow-lg border-0 rounded-4" style="max-width: 600px; width: 100%;">
+        <h2 class="text-center mb-4 fw-bold text-primary">Add New Agent</h2>
+        <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
             {% csrf_token %}
-            {{ form.as_p }}
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary btn-lg">Add Agent</button>
+
+            {% for field in form %}
+                <div class="mb-3">
+                    <label for="{{ field.id_for_label }}" class="form-label fw-semibold">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small class="form-text text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div class="invalid-feedback d-block">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-lg fw-semibold shadow-sm">Add Agent</button>
             </div>
         </form>
-        <div class="text-center mt-3">
-            <a href="{% url 'agent_list' %}" class="btn btn-secondary">View Agents</a>
+        <div class="text-center mt-4">
+            <a href="{% url 'agent_list' %}" class="btn btn-outline-secondary fw-semibold px-4 py-2 shadow-sm">View Agents</a>
         </div>
     </div>
 </div>
+
+<style>
+    /* Custom Form Styling */
+    form input, form select, form textarea {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        transition: all 0.3s ease-in-out;
+        font-size: 1rem;
+    }
+
+    form input:focus, form select:focus, form textarea:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+        outline: none;
+    }
+
+    .btn-primary {
+        background: linear-gradient(to right, #007bff, #0056b3);
+        border: none;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+    }
+
+    .btn-outline-secondary {
+        transition: background 0.3s, color 0.3s;
+    }
+
+    .btn-outline-secondary:hover {
+        background: #6c757d;
+        color: white;
+    }
+</style>
 {% endblock %}

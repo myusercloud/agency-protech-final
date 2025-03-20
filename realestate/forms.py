@@ -9,10 +9,12 @@ class PropertyForm(forms.ModelForm):
 
 class AppointmentForm(forms.ModelForm):
     agent = forms.ModelChoiceField(queryset=Agent.objects.all(), required=False, empty_label="Select an Agent")
+    date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+    time = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
 
     class Meta:
         model = Appointment
-        fields = ['name', 'email', 'phone', 'property', 'agent', 'date', 'time', 'message']
+        fields = ['name', 'email', 'phone', 'property', 'date', 'time', 'message']
 
 class AgentForm(forms.ModelForm):
     class Meta:

@@ -2,21 +2,85 @@
 {% load static %}
 
 {% block content %}
-<div class="container-fluid mt-5">
-    <div class="appointment-form card shadow-lg p-4">
+<div class="container mt-5">
+    <!-- Agents Section -->
+    <div class="agents-section mb-5">
+        <h2 class="text-center mb-4">Meet Our Agents</h2>
+        <div class="row">
+            {% for agent in agents %}
+            <div class="col-md-4">
+                <div class="card agent-card shadow-sm text-center p-3">
+                    <img src="{{ agent.profile_picture.url }}" class="agent-img rounded-circle" alt="{{ agent.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ agent.name }}</h5>
+                        <p class="text-muted">{{ agent.email }}</p>
+                        <p class="text-muted">{{ agent.phone }}</p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center">No agents available at the moment.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Appointment Booking Form -->
+    <div class="appointment-form card shadow-lg p-4 bg-light">
         <h2 class="text-center mb-4">Book an Appointment</h2>
-        <form method="post">
+        <form method="post" class="styled-form">
             {% csrf_token %}
             <div class="mb-3">
                 {{ form.as_p }}
             </div>
-            <div class="text-center">
+            <div>
                 <button type="submit" class="btn btn-primary btn-lg">Book Appointment</button>
             </div>
-            <div class="text-center">
-                <a href="{% url 'pay' %}">Make deposit</a>
-            </div>
+
         </form>
     </div>
 </div>
+
+<style>
+    .agent-card {
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        padding: 20px;
+        background: #fff;
+    }
+    .agent-card:hover {
+        transform: scale(1.05);
+    }
+    .agent-img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 50%;
+        display: block;
+        margin: 0 auto 10px;
+    }
+    .appointment-form {
+        border-radius: 15px;
+        max-width: 600px;
+        margin: auto;
+        background: #f8f9fa;
+    }
+    .styled-form input, .styled-form select, .styled-form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    .styled-form input:focus, .styled-form select:focus, .styled-form textarea:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+    .message-box {
+        height: 80px; /* Reduced height */
+        resize: none; /* Prevent resizing */
+    }
+</style>
 {% endblock %}

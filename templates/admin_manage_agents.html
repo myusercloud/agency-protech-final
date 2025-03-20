@@ -4,46 +4,83 @@
 
 {% block content %}
 <div class="container mt-5">
-    <div class="dashboard card shadow-lg p-4">
-        <h2 class="text-center text-dark fw-bold">Manage Agents</h2>
+    <div class="dashboard card shadow-lg p-5 border-0 rounded-4">
+        <h2 class="text-center text-primary fw-bold mb-4">Manage Agents</h2>
 
-        <a href="{% url 'add_agent' %}" class="btn btn-success mb-3">Add New Agent</a>
+        <div class="d-flex justify-content-between mb-3">
+            <a href="{% url 'add_agent' %}" class="btn btn-success fw-semibold shadow-sm">
+                <i class="fas fa-user-plus"></i> Add New Agent
+            </a>
+        </div>
 
-        <table class="table table-striped">
-            <thead class="table-dark">
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Profile Picture</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for agent in agents %}
-                <tr>
-                    <td>{{ agent.name }}</td>
-                    <td>{{ agent.email }}</td>
-                    <td>{{ agent.phone }}</td>
-                    <td>
-                        {% if agent.profile_picture %}
-                            <img src="{{ agent.profile_picture.url }}" alt="Profile Picture" width="50" height="50" class="rounded-circle">
-                        {% else %}
-                            No Image
-                        {% endif %}
-                    </td>
-                    <td>
-                        <a href="{% url 'update_agent' agent.id %}" class="btn btn-sm btn-warning">Edit</a>
-                        <a href="{% url 'delete_agent' agent.id %}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?');">Delete</a>
-                    </td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="5" class="text-center text-muted">No agents available.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-primary">
+                    <tr>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Email</th>
+                        <th class="text-center">Phone</th>
+                        <th class="text-center">Profile Picture</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for agent in agents %}
+                    <tr class="border-bottom">
+                        <td class="text-center fw-semibold">{{ agent.name }}</td>
+                        <td class="text-center text-muted">{{ agent.email }}</td>
+                        <td class="text-center">{{ agent.phone }}</td>
+                        <td class="text-center">
+                            {% if agent.profile_picture %}
+                                <img src="{{ agent.profile_picture.url }}" alt="Profile Picture" width="50" height="50" class="rounded-circle shadow-sm border">
+                            {% else %}
+                                <span class="text-muted">No Image</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">
+                            <a href="{% url 'update_agent' agent.id %}" class="btn btn-sm btn-warning me-2 shadow-sm">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <a href="{% url 'delete_agent' agent.id %}" class="btn btn-sm btn-danger shadow-sm" onclick="return confirm('Are you sure?');">
+                                <i class="fas fa-trash"></i> Delete
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center text-muted fw-semibold py-4">No agents available.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+
+<style>
+    .table-hover tbody tr:hover {
+        background-color: rgba(0, 123, 255, 0.1);
+        transition: background 0.3s ease-in-out;
+    }
+
+    .btn-warning, .btn-danger {
+        transition: all 0.2s ease-in-out;
+    }
+
+    .btn-warning:hover {
+        background-color: #e0a800;
+        transform: scale(1.05);
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+        transform: scale(1.05);
+    }
+
+    .dashboard {
+        background: #ffffff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
 {% endblock %}

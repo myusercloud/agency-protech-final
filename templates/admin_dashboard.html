@@ -20,7 +20,10 @@
                     <a class="btn btn-sm btn-light" href="{% url 'admin_appointments' %}">View Appointments</a>
                 </li>
                 <li>
-                    <a href="{% url 'add_agent' %}" class="btn btn-sm btn-light">Manage Agents</a>
+                    <a href="{% url 'agent_list' %}" class="btn btn-sm btn-light">Manage Agents</a>
+                </li>
+                <li>
+                    <a href="{% url 'transactions' %}" class="btn btn-sm btn-light m ">Transactions</a>
                 </li>
                 <li class="nav-item mx-2">
                     <a class="btn btn-sm btn-danger" href="{% url 'admin_logout' %}">Logout</a>
@@ -63,6 +66,9 @@
 </div>
 
 <style>
+    .btn{
+        margin-left: 3px;
+    }
     .dashboard {
         max-width: 900px;
         margin: auto;
