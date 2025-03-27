@@ -117,6 +117,9 @@ def book_appointment(request):
 def appointment_success(request):
     return render(request, 'appointment_success.html')
 
+def pay_options(request):
+    return render(request, 'payment_option.html')
+
 
 
 

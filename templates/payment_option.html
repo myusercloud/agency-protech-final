@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Payment Options{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Choose Your Payment Method</h2>
+        <p class="text-muted">Secure. Fast. Convenient. 💸</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+        <!-- Credit/Debit Card -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 payment-option hover-effect">
+                <div class="card-body text-center">
+                    <img src="{% static 'img/img_2.png' %}" alt="Card" width="60" class="mb-3">
+                    <h5 class="card-title">Credit/Debit Card</h5>
+                    <p class="card-text">Pay using Visa, Mastercard, or any major card.</p>
+                    <a href="#" class="btn btn-warning">Pay with Card</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Money -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 payment-option hover-effect">
+                <div class="card-body text-center">
+                    <img src="{% static 'img/mpesa.png' %}" alt="Mobile Money" width="60" class="mb-3">
+                    <h5 class="card-title">Mobile Money</h5>
+                    <p class="card-text">MTN, Airtel, or any supported mobile wallet.</p>
+                    <a href="{% url 'pay' %}" class="btn btn-warning">Pay with Mobile Money</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bank Transfer -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 payment-option hover-effect">
+                <div class="card-body text-center">
+                    <img src="{% static 'img/banktransfer.png' %}" alt="Bank" width="60" class="mb-3">
+                    <h5 class="card-title">Bank Transfer</h5>
+                    <p class="card-text">Make a direct transfer from your bank account.</p>
+                    <a href="#" class="btn btn-warning">Pay via Bank</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hover-effect {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 20px;
+    }
+
+    .hover-effect:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .card img {
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+    }
+
+    .btn-warning {
+        border-radius: 50px;
+        padding: 10px 25px;
+        font-weight: 600;
+        transition: background 0.3s ease;
+    }
+
+    .btn-warning:hover {
+        background-color: #e6b800;
+    }
+</style>
+{% endblock %}

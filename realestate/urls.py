@@ -23,6 +23,8 @@ urlpatterns = [
     path('agents/', agent_list, name='agent_list'),
 
     path('pay/', views.pay, name='pay'),
+    path('pay_options/', views.pay_options, name='pay_options'),
+
 
     path('stk/', views.stk, name='stk'),
     path('token/', views.token, name='token'),
